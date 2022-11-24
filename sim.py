@@ -1,0 +1,2 @@
+
+print("Sidereal Confluence simulator")
