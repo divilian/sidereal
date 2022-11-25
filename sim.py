@@ -47,11 +47,12 @@ for r in range(numRounds):
 colorplot = {col:col for col in all_colors}
 colorplot['ship'] = 'red'
 colorplot['barrel'] = 'orange'
-colorplot['white'] = 'black'
+colorplot['white'] = 'purple'
 
 plt.clf()
 for col,vec in vecs.items():
-    plt.plot(range(numRounds), vec, color=colorplot[col], label=col)
+    if col != 'ship':
+        plt.plot(range(numRounds), vec, color=colorplot[col], label=col)
 plt.legend()
 plt.savefig("plot.png")
 
