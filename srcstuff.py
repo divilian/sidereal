@@ -1,5 +1,6 @@
 
 import re
+import sys
 
 class Spec():
     def __init__(self, color, amt):
@@ -27,11 +28,15 @@ class Converter():
         self.prods = set()
         pat = re.compile(r"(?P<name>.*): \((?P<inp>.*)\) -> \((?P<outp>.*)\)")
         file_info = pat.match(line.strip())
+        if not file_info:
+            sys.exit(f"Malformed line: {line.strip()}.")
         self.name = file_info['name']
         self.reqs = self.process(file_info['inp'])
         self.prods = self.process(file_info['outp'])
 
     def process(self, line):
+        if line == '':
+            return set()
         pattern = re.compile(r"(?P<color>[a-z]+)(?P<amt>\d+)")
         parts = line.split(",")
         ret_val = set()
