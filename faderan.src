@@ -1,7 +1,10 @@
 Contents:
-green: 1
-ship: 1
-white: 1
+barrel: 1
+yellow: 1
+blue: 1
+brown: 1
+ship: 2
+white: 3
 Converters:
 archaic automated support network: () -> (ship1,white1,brown1,green1)
 ritual government: (white4) -> (barrel1,black1,green1)
