@@ -135,6 +135,18 @@ class Converter():
             outputs[prod.color] += prod.amt
 
 
+def vpEquiv(inventory):
+    tot = 0
+    tot += inventory['barrel'] / 2
+    tot += inventory['blue'] / 4
+    tot += inventory['yellow'] / 4
+    tot += inventory['black'] / 4
+    tot += inventory['white'] / 6
+    tot += inventory['brown'] / 6
+    tot += inventory['green'] / 6
+    tot += inventory['ship'] / 6
+    return tot
+
 def runRound(inventory, converters):
     random.shuffle(converters)
     temp = Inventory()
