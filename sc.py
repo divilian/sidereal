@@ -34,6 +34,10 @@ class Inventory(defaultdict):
     def addSpec(self, spec):
         self[spec.color] = spec.amt
 
+    def __repr__(self):
+        return ", ".join(
+            [ f"{amt} {col if amt == 1 else col + 's'}"
+                for col, amt in self.items() ] )
 
 class Spec():
     @classmethod
@@ -99,18 +103,22 @@ class Converter():
         return rv
 
     def canConvertWith(self, inputs):
-        return False
+        for req in self.reqs:
+            if inputs[req.color] < req.amt:
+                return False
+        print(f"  Running {self.name}...")
+        return True
 
     def convert(self, inputs, outputs):
         for req in self.reqs:
             inputs[req.color] -= req.amt
         for prod in self.prods:
-            outputs[req.color] += req.amt
+            outputs[prod.color] += prod.amt
 
 
 def runRound(inventory, converters):
     random.shuffle(converters)
-    temp = {}
+    temp = Inventory()
     for c in converters:
         if c.canConvertWith(inventory):
             c.convert(inventory, temp)

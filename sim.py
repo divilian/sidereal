@@ -32,6 +32,9 @@ for c in converters:
     print("  " + str(c))
 
 for r in range(numRounds):
+    print("==============================")
+    print(f"Round {r}:")
     sc.runRound(inventory, converters)
+    print(f"\nInventory now:\n  {inventory}")
 
 
