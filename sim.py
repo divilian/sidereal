@@ -53,6 +53,9 @@ plt.clf()
 for col,vec in vecs.items():
     if col != 'ship':
         plt.plot(range(numRounds), vec, color=colorplot[col], label=col)
+plt.title(filename.replace(".src","").title())
 plt.legend()
-plt.savefig("plot.png")
+plt.ylim((0,numRounds*3))
+pltsize = (6,3)
+plt.savefig(filename.replace(".src",".png"), figsize=pltsize, dpi=600)
 
