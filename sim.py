@@ -1,9 +1,9 @@
 
 import sys
 import os.path
-import srcstuff
+import sc
 import importlib
-importlib.reload(srcstuff)
+importlib.reload(sc)
 
 print("Sidereal Confluence simulator")
 
@@ -22,7 +22,7 @@ else:
 if not os.path.exists(filename):
     sys.exit(f"No such file {filename}.")
 
-inventory, converters = srcstuff.readSrcFile(filename)
+inventory, converters = sc.readSrcFile(filename)
 
 print("Initial inventory:")
 for i in inventory:
@@ -32,6 +32,6 @@ for c in converters:
     print(c)
 
 for r in range(numRounds):
-    srcstuff.runRound(inventory, converters)
+    sc.runRound(inventory, converters)
 
 
