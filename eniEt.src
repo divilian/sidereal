@@ -1,0 +1,10 @@
+Inventory:
+blue: 1
+brown: 2
+white: 2
+green: 1
+ship: 1
+Converters:
+coral song: (white5) -> (ship2,barrel1,black1,green1)
+bone carving: (blue2) -> (white2,brown1,green1)
+deep hunting: () -> (ship1,blue1)

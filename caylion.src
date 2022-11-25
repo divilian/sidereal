@@ -1,0 +1,11 @@
+Inventory:
+black: 2
+green: 5
+white: 4
+brown: 2
+ship: 1
+Converters:
+distributed telenet: (black1) -> (brown1,white1)
+planetary ecological dominance: () -> (ship1,green3,white1)
+oceanic processing: (green2) -> (blue1,brown1)
+lunar mining consortium: (blue2) -> (ship2,black1,white1)

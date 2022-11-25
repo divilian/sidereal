@@ -1,0 +1,14 @@
+Inventory:
+barrel: 1
+blue: 1
+yellow: 2
+black: 1
+green: 1
+brown: 1
+white: 1
+Converters:
+innovation of hands: (barrel1) -> (ship2,yellow1,green1)
+social ecological mutualism: () -> (ship2,blue1,brown1)
+empathy of words: (brown2,blue1) -> (black2,white2)
+choice of paths: (white2,black1) -> (barrel1,green2)
+work of mules: (green2,yellow1) -> (ship2,blue1,brown2)

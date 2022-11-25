@@ -1,0 +1,12 @@
+Inventory:
+blue: 1
+yellow: 2
+black: 2
+ship: 4
+green: 1
+white: 1
+brown: 2
+Converters:
+starstrider jumpcores: (blue2) -> (ship4,green1)
+underground cities: () -> (ship3,brown2)
+perfume pheromone loyalty: (brown4) -> (yellow1,black1,blue1,white1)

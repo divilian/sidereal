@@ -1,0 +1,12 @@
+Inventory:
+barrel: 1
+yellow: 1
+blue: 1
+black: 1
+white: 2
+green: 3
+brown: 3
+Converters:
+hand-crafted polyutility components: () -> (barrel1,ship1)
+anarchic sacrificial high-risk laboratories: (barrel1) -> (white1,green1,brown2)
+expansive social diffusion: (green5) -> (ship4,black1,yellow1,blue1)
