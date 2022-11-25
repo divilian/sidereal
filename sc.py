@@ -16,7 +16,6 @@ def readSrcFile(filename):
         specPat = re.compile("(?P<col>[a-z]*):\s*(?P<amt>\d*)")
         while line != "Converters:":
             matches = specPat.match(line)
-            print(f"line is {line}")
             inventory[matches['col']] += int(matches['amt'])
             line = f.readline().rstrip()
         line = f.readline().rstrip()

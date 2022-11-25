@@ -26,10 +26,10 @@ inventory, converters = sc.readSrcFile(filename)
 
 print("Initial inventory:")
 for i in inventory:
-    print(i)
+    print("  " + str(i))
 print("Initial converters:")
 for c in converters:
-    print(c)
+    print("  " + str(c))
 
 for r in range(numRounds):
     sc.runRound(inventory, converters)
