@@ -11,12 +11,10 @@ def readSrcFile(filename):
         if f.readline().rstrip() != "Contents:":
             sys.exit(f"Illegal first line of {filename}.")
         converters = []
-        inventory = defaultdict(lambda: 0)
+        inventory = Inventory()
         line = f.readline().rstrip()
-        specPat = re.compile("(?P<col>[a-z]*):\s*(?P<amt>\d*)")
         while line != "Converters:":
-            matches = specPat.match(line)
-            inventory[matches['col']] += int(matches['amt'])
+            inventory.addSpec(Spec.fromLine(line))
             line = f.readline().rstrip()
         line = f.readline().rstrip()
         while line:
@@ -25,13 +23,33 @@ def readSrcFile(filename):
     return inventory, converters
 
 
+class Inventory(defaultdict):
+    # https://stackoverflow.com/questions/45410638/how-can-i-inherit-defaultdict-and-use-its-copy-method-in-subclass-method
+    def __init__(self,*args):
+        if args:
+            super(Inventory, self).__init__(*args)
+        else:
+            super(Inventory, self).__init__(int)
+
+    def addSpec(self, spec):
+        self[spec.color] = spec.amt
+
+
 class Spec():
+    @classmethod
+    def fromLine(self, line):
+        specPat = re.compile("(?P<col>[a-z]*):\s*(?P<amt>\d*)")
+        matches = specPat.match(line)
+        return Spec(matches['col'],matches['amt'])
+        
     def __init__(self, color, amt):
         self.color = color
         self.amt = int(amt)
+
     def __repr__(self):
         return str(self.amt) + " " + \
             (self.color if self.amt == 1 else self.color + "s")
+
 
 # Do inputs and outputs differ in anything important?
 #class Requirement(Spec):
