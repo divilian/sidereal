@@ -1,6 +1,28 @@
 
 import re
 import sys
+from collections import defaultdict
+import random
+
+def readSrcFile(filename):
+    with open(filename, encoding="utf-8") as f:
+        if f.readline().rstrip() != "Contents:":
+            sys.exit(f"Illegal first line of {filename}.")
+        converters = []
+        inventory = defaultdict(lambda: 0)
+        line = f.readline().rstrip()
+        specPat = re.compile("(?P<col>[a-z]*):\s*(?P<amt>\d*)")
+        while line != "Converters:":
+            matches = specPat.match(line)
+            print(f"line is {line}")
+            inventory[matches['col']] += int(matches['amt'])
+            line = f.readline().rstrip()
+        line = f.readline().rstrip()
+        while line:
+            converters.append(Converter(line))
+            line = f.readline().rstrip()
+    return inventory, converters
+
 
 class Spec():
     def __init__(self, color, amt):
@@ -21,8 +43,10 @@ class Spec():
 
 
 class Converter():
+
     def __init__(self):
         pass
+
     def __init__(self, line):
         self.reqs = set()
         self.prods = set()
@@ -55,4 +79,21 @@ class Converter():
         rv += ' and '.join([ r.__repr__() for r in self.prods ])
         return rv
 
-        
+    def canConvertWith(self, inputs):
+        return False
+
+    def convert(self, inputs, outputs):
+        for req in self.reqs:
+            inputs[req.color] -= req.amt
+        for prod in self.prods:
+            outputs[req.color] += req.amt
+
+
+def runRound(inventory, converters):
+    random.shuffle(converters)
+    temp = {}
+    for c in converters:
+        if c.canConvertWith(inventory):
+            c.convert(inventory, temp)
+    inventory.clear()
+    inventory.update(temp)
