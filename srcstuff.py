@@ -46,8 +46,13 @@ class Converter():
         return ret_val
 
     def __repr__(self):
-        ret_val = self.name.title() + ": "
-        ret_val += ' and '.join([ r.__repr__() for r in self.reqs ]) + " -> "
-        ret_val += ' and '.join([ r.__repr__() for r in self.prods ])
-        return ret_val
+        rv = self.name.title() + ": "
+        if self.reqs:
+            rv += ' and '.join([ r.__repr__() for r in self.reqs ])
+        else:
+            rv += "(none)"
+        rv += " -> "
+        rv += ' and '.join([ r.__repr__() for r in self.prods ])
+        return rv
 
+        
