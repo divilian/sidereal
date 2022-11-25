@@ -32,9 +32,19 @@ class Inventory(defaultdict):
             super(Inventory, self).__init__(int)
 
     def addSpec(self, spec):
-        self[spec.color] = spec.amt
+        self[spec.color] += spec.amt
+
+    # Add the contents of a second Inventory object to this one.
+    def addInventory(self, inv2):
+        for color, amt in inv2.items():
+            self[color] += amt
+
+    def consumeSpec(self, spec):
+        self[spec.color] -= spec.amt
 
     def __repr__(self):
+        if len(self) == 0:
+            return "(empty inventory)"
         return ", ".join(
             [ f"{amt} {col if amt == 1 else col + 's'}"
                 for col, amt in self.items() ] )
@@ -122,5 +132,4 @@ def runRound(inventory, converters):
     for c in converters:
         if c.canConvertWith(inventory):
             c.convert(inventory, temp)
-    inventory.clear()
-    inventory.update(temp)
+    inventory.addInventory(temp)
