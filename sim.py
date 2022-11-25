@@ -3,6 +3,9 @@ import sys
 import os.path
 import sc
 import importlib
+import numpy as np
+import matplotlib.pyplot as plt
+from collections import defaultdict
 importlib.reload(sc)
 
 print("Sidereal Confluence simulator")
@@ -22,7 +25,9 @@ else:
 if not os.path.exists(filename):
     sys.exit(f"No such file {filename}.")
 
-inventory, converters = sc.readSrcFile(filename)
+inventory, converters, all_colors = sc.readSrcFile(filename)
+
+vecs = { c:np.zeros(numRounds) for c in all_colors }
 
 print("Initial inventory:")
 for i in inventory:
@@ -36,5 +41,17 @@ for r in range(numRounds):
     print(f"Round {r}:")
     sc.runRound(inventory, converters)
     print(f"\nInventory now:\n  {inventory}")
+    for col,amt in inventory.items():
+        vecs[col][r] = amt
 
+colorplot = {col:col for col in all_colors}
+colorplot['ship'] = 'red'
+colorplot['barrel'] = 'orange'
+colorplot['white'] = 'black'
+
+plt.clf()
+for col,vec in vecs.items():
+    plt.plot(range(numRounds), vec, color=colorplot[col], label=col)
+plt.legend()
+plt.savefig("plot.png")
 

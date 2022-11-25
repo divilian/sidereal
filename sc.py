@@ -20,7 +20,8 @@ def readSrcFile(filename):
         while line:
             converters.append(Converter(line))
             line = f.readline().rstrip()
-    return inventory, converters
+    return inventory, converters,\
+        set.union(*[ c.all_colors() for c in converters ])
 
 
 class Inventory(defaultdict):
@@ -118,6 +119,10 @@ class Converter():
                 return False
         print(f"  Running {self.name}...")
         return True
+
+    def all_colors(self):
+        return { r.color for r in self.reqs } | \
+            { p.color for p in self.prods }
 
     def convert(self, inputs, outputs):
         for req in self.reqs:
