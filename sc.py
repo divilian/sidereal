@@ -121,8 +121,12 @@ class Converter():
         return True
 
     def all_colors(self):
-        return { r.color for r in self.reqs } | \
-            { p.color for p in self.prods }
+        #return { r.color for r in self.reqs } | \
+        #    { p.color for p in self.prods }
+        # (Meh, just return all the known colors and stop trying to be smart
+        # about it.)
+        return {'black','blue','white','yellow','blue','green','ship',
+            'brown','barrel'}
 
     def convert(self, inputs, outputs):
         for req in self.reqs:
