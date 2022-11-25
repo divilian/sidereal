@@ -8,7 +8,7 @@ import random
 
 def readSrcFile(filename):
     with open(filename, encoding="utf-8") as f:
-        if f.readline().rstrip() != "Contents:":
+        if f.readline().rstrip() != "Inventory:":
             sys.exit(f"Illegal first line of {filename}.")
         converters = []
         inventory = Inventory()
